@@ -1149,7 +1149,7 @@
 
     /* Sections */
     .sec {
-      padding-block: 76px
+      padding-block: 56px
     }
 
     .sec-alt {
@@ -1732,7 +1732,7 @@
 
     .foot-in {
       display: grid;
-      grid-template-columns: 1.3fr 1fr 1.2fr 1fr;
+      grid-template-columns: 1.4fr 1.2fr 1fr;
       gap: 36px;
       padding-block: 56px 30px
     }
@@ -4582,7 +4582,53 @@
         width: 80px
       }
     }
-  </style>
+
+  .perks {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .perks-in {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding-block: 22px;
+  }
+
+  .perk {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .perk-ic {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--navy-soft);
+    color: var(--link);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+
+  .perk b {
+    display: block;
+  }
+
+  .perk small {
+    color: var(--ink-2);
+    font-size: 13.5px;
+  }
+
+  @media (max-width: 760px) {
+    .perks-in {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  }
+</style>
   <style>
     :root {
       padding-top: env(safe-area-inset-top, 0px);
@@ -4897,22 +4943,20 @@
     const TIER_NAMES = ['Hemat', 'Rekomendasi', 'Pro'];
 
     const TESTI = [
-      ['Nadia Kusuma', 'Mahasiswa DKV, Surabaya', 'Sewa paket wisuda buat foto teman seangkatan. Booking dari kos, ambil di toko cuma 3 menit karena tinggal scan.'],
-      ['Panitia Dies Natalis', 'BEM Fakultas Teknik', 'Fitur rekomendasi langsung kasih paket dokumentasi event sesuai budget proposal. LPJ juga gampang karena ada log RFID serah terima.'],
+      ['Nadia Kusuma', 'Mahasiswa DKV, Surabaya', 'Sewa paket wisuda buat foto teman seangkatan. Booking dari kos, ambil di toko cuma 3 menit karena tinggal tunjukkan QR.'],
+      ['Panitia Dies Natalis', 'BEM Fakultas Teknik', 'Fitur rekomendasi langsung kasih paket dokumentasi event sesuai budget proposal. LPJ juga gampang karena riwayat serah terimanya lengkap.'],
       ['Fajar Hidayat', 'Kreator konten kuliner', 'Ketersediaannya akurat. Nggak ada lagi cerita datang ke toko tapi kameranya ternyata sudah disewa orang.'],
     ];
     const FAQ = [
       ['Apa saja syarat untuk menyewa?', 'Akun terverifikasi dengan KTM aktif (mahasiswa) atau KTP, lalu bayar biaya sewa dan deposit. Verifikasi cukup sekali saat daftar.'],
       ['Berapa deposit dan kapan dikembalikan?', 'Deposit tergantung alat, mulai Rp30.000 untuk mini tripod sampai Rp1.000.000 untuk kamera full frame. Dikembalikan maksimal 1×24 jam setelah alat dicek lengkap.'],
-      ['Bagaimana cara kerja RFID saat ambil dan kembali?', 'Setiap unit punya tag RFID. Saat kamu ambil atau kembalikan, alat diletakkan di gerbang pemindai. Sistem mencatat waktu dan daftar alat, lalu kamu langsung dapat notifikasi.'],
       ['Bagaimana kalau saya terlambat mengembalikan?', 'Kami kirim pengingat sehari sebelum batas waktu. Jika terlambat, denda 10% tarif harian per jam dipotong dari deposit, maksimal 150% tarif harian per hari.'],
-      ['Bisakah alat diantar ke kampus?', 'Saat ini semua pengambilan di toko agar alat bisa dicek bersama dan dipindai RFID. Layanan antar sedang kami siapkan.'],
       ['Bisa batal atau ubah jadwal?', 'Bisa. Batal lebih dari 24 jam sebelum jadwal ambil, dana kembali penuh. Kurang dari 24 jam, dana kembali 50%.'],
     ];
     const TERMS = [
       ['Identitas', 'Penyewa wajib memiliki akun terverifikasi dengan KTM aktif atau KTP. Identitas asli ditunjukkan saat pengambilan pertama.'],
       ['Deposit keamanan', 'Deposit dibayar bersama biaya sewa dan dikembalikan maksimal 1×24 jam setelah alat dicek dan dinyatakan lengkap.'],
-      ['Pengambilan & pengembalian', 'Semua alat diambil dan dikembalikan di toko. Gerbang RFID mencatat waktu dan daftar alat secara otomatis; catatan ini menjadi bukti serah terima.'],
+      ['Pengambilan & pengembalian', 'Semua alat diambil dan dikembalikan di toko. Waktu dan daftar alat tercatat di pesananmu sebagai bukti serah terima.'],
       ['Keterlambatan', 'Denda 10% dari tarif harian per jam keterlambatan, maksimal 150% tarif harian untuk setiap hari keterlambatan. Denda dipotong dari deposit.'],
       ['Kerusakan & kehilangan', 'Kerusakan akibat pemakaian ditanggung penyewa sesuai biaya servis resmi. Alat yang hilang diganti senilai harga pasar.'],
       ['Pembatalan', 'Batal lebih dari 24 jam sebelum jadwal ambil: dana kembali 100%. Kurang dari 24 jam: dana kembali 50%.'],
@@ -4936,7 +4980,7 @@
     const DEMO_USER = { name: 'Alya Putri Ramadhani', email: 'alya.putri@student.its.ac.id', phone: '0812-3344-5566', campus: 'Institut Teknologi Sepuluh Nopember', idType: 'KTM', idNo: '5025221047', idFile: 'ktm_alya.jpg', address: 'Keputih, Sukolilo, Surabaya', verified: 'verified' };
 
     /* ---------- State ---------- */
-    const LS = 'ser-proto-v1';
+    const LS = 'ser-proto-v2';
     const S = {
       route: 'home', params: {},
       user: null,
@@ -4993,7 +5037,7 @@
     function genCode() { const a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s = ''; for (let i = 0; i < 5; i++) s += a[Math.floor(Math.random() * a.length)]; return 'SER-' + s; }
     function rfidEntry(o, type, at) {
       return {
-        type, at, gate: type === 'out' ? 'Gerbang 1 · Meja pengambilan' : 'Gerbang 2 · Meja pengembalian',
+        type, at, gate: type === 'out' ? 'Meja pengambilan' : 'Meja pengembalian',
         tags: o.lines.flatMap(l => Array.from({ length: l.qty }, (_, i) => ({ tag: tagId(l.id, i), name: item(l.id).name }))),
       };
     }
@@ -5029,9 +5073,9 @@
       o4.review = { stars: 5, text: 'PodMic-nya mantap, suara ruang sekre nggak kebawa. Pengembalian cepat banget.', at: o4.dueAt + 3 * HOUR };
       S.orders = [o1, o2, o3, o4];
       S.notifs = [
-        { id: 'n1', type: 'return', title: 'Pengingat pengembalian', text: 'SER-7K2M9 harus dikembalikan besok pukul 12.00. Bawa semua alat ke meja pengembalian untuk dipindai.', at: now - 40 * MIN, read: false, order: 'SER-7K2M9' },
+        { id: 'n1', type: 'return', title: 'Pengingat pengembalian', text: 'SER-7K2M9 harus dikembalikan besok pukul 12.00. Bawa semua alat ke meja pengembalian di toko.', at: now - 40 * MIN, read: false, order: 'SER-7K2M9' },
         { id: 'n2', type: 'pickup', title: 'Pengingat pengambilan', text: 'SER-4P8QX siap diambil besok pukul 10.00 di toko Kertajaya. Tunjukkan QR booking.', at: now - 2 * HOUR, read: false, order: 'SER-4P8QX' },
-        { id: 'n3', type: 'rfid', title: 'Scan RFID berhasil', text: '3 alat tercatat keluar untuk SER-7K2M9 di Gerbang 1, pukul ' + fTime(o1.pickupAt + 7 * MIN) + '.', at: o1.pickupAt + 7 * MIN, read: true, order: 'SER-7K2M9' },
+        { id: 'n3', type: 'rfid', title: 'Alat sudah diambil', text: '3 alat tercatat diambil untuk SER-7K2M9, pukul ' + fTime(o1.pickupAt + 7 * MIN) + '.', at: o1.pickupAt + 7 * MIN, read: true, order: 'SER-7K2M9' },
         { id: 'n4', type: 'deposit', title: 'Deposit dikembalikan', text: 'Deposit ' + rp(o3.deposit) + ' untuk SER-2H6TB sudah dikembalikan ke rekening BCA.', at: o3.events.completed, read: true, order: 'SER-2H6TB' },
       ];
       S.pays = [{ type: 'ewallet', name: 'GoPay', detail: '0812-••••-5566', def: true }, { type: 'bank', name: 'BCA', detail: '•••• 4821 · rekening refund deposit', def: false }];
@@ -5042,15 +5086,15 @@
     const getOrder = c => S.orders.find(o => o.code === c);
 
     /* ---------- Components ---------- */
-    function art(it, cls = '', tag = false) {
-      return `<div class="art ${cls}" style="--tint:var(${catOf(it.cat).tint})">${tag ? `<span class="tag">${ic('radio')}RFID</span>` : ''}<svg viewBox="0 0 120 90" aria-hidden="true">${ART[it.art]}</svg></div>`;
+    function art(it, cls = '') {
+      return `<div class="art ${cls}" style="--tint:var(${catOf(it.cat).tint})"><svg viewBox="0 0 120 90" aria-hidden="true">${ART[it.art]}</svg></div>`;
     }
     function stars(n) { return Array.from({ length: 5 }, (_, i) => i < n ? ic('star', 'star sm') : ic('star', 'sm')).join(''); }
     function pcard(it, dateMode) {
       const today = !it.booked.includes(0);
       const okNow = dateMode || today;
       return `<article class="pcard" data-go="item" data-id="${it.id}" tabindex="0" aria-label="${esc(it.name)}">
-    ${art(it, '', true)}
+    ${art(it)}
     <div class="pc-body">
       <div class="pc-meta"><span>${catOf(it.cat).name}</span><span class="rt">${ic('star', 'star')}${it.rating}</span></div>
       <h3>${esc(it.name)}</h3>
@@ -5064,7 +5108,6 @@
       return `<article class="pkg">
     <div class="pkg-top"><span class="pill pill-accent">${p.tag}</span><div class="pkg-arts">${p.lines.map(([id]) => art(item(id), 'mini')).join('')}</div></div>
     <div><h3>${p.name}</h3><div class="pkg-for">Cocok untuk ${p.for}</div></div>
-    <p class="muted">${p.desc}</p>
     <ul class="pkg-list">${p.lines.map(([id, q]) => `<li>${ic('check')}<span>${q > 1 ? q + '× ' : ''}${esc(item(id).name)}</span></li>`).join('')}</ul>
     <div class="pkg-foot"><div class="price"><s>${rp(daily)}</s><b>${rp(daily * 0.9)}</b><small>/hari</small></div>
       <div class="pkg-actions"><button class="btn btn-outline btn-sm" data-act="customPkg" data-pid="${p.id}">Atur Paket</button><button class="btn btn-accent btn-sm" data-act="rentPkg" data-pid="${p.id}">Sewa Paket</button></div></div>
@@ -5115,7 +5158,7 @@
     <nav class="mnav ${S.ui.mobileNav ? 'open' : ''}" aria-label="Menu mobile">${MENU.map(([k, t]) => `<button data-go="${k}">${t}</button>`).join('')}</nav>
   </header>`;
     }
-    const NICON = { pickup: 'store', return: 'clock', rfid: 'radio', pay: 'check', info: 'info', deposit: 'wallet' };
+    const NICON = { pickup: 'store', return: 'clock', rfid: 'check', pay: 'check', info: 'info', deposit: 'wallet' };
     function notifDD() {
       const list = S.notifs.slice().sort((a, b) => b.at - a.at);
       return `<div class="dd" role="dialog" aria-label="Notifikasi"><div class="dd-head"><b>Notifikasi</b><button class="link-btn" data-act="readAll">Tandai semua dibaca</button></div>
@@ -5133,8 +5176,7 @@
       $('#foot').innerHTML = `<footer class="foot"><div class="wrap">
     <div class="foot-in">
       <div><div class="logo" style="margin-bottom:14px"><span class="logo-mark">${LOGO}</span><span class="logo-text"><b>Media Equipment</b><small>Rental · Surabaya</small></span></div>
-        <p style="font-size:14px;max-width:300px">Sewa kamera, lensa, audio, dan lighting untuk mahasiswa, kreator, dan panitia acara kampus di Surabaya. Setiap unit ber-tag RFID.</p></div>
-      <div><h4>Jelajahi</h4><ul>${MENU.map(([k, t]) => `<li><button class="fl" data-go="${k}">${t}</button></li>`).join('')}</ul></div>
+        <p style="font-size:14px;max-width:300px">Sewa kamera, lensa, audio, dan lighting untuk mahasiswa, kreator, dan panitia acara kampus di Surabaya.</p></div>
       <div><h4>Toko</h4><ul><li>${ic('pin')}<span>${STORE.addr}</span></li><li>${ic('clock')}<span>${STORE.hours.join('<br>')}</span></li></ul></div>
       <div><h4>Kontak</h4><ul><li>${ic('phone')}<span>WhatsApp ${STORE.wa}</span></li><li>${ic('mail')}<span>${STORE.email}</span></li><li>${ic('insta')}<span>Instagram ${STORE.ig}</span></li><li>${ic('tiktok')}<span>TikTok ${STORE.ig}</span></li></ul></div>
     </div>
@@ -5146,33 +5188,35 @@
     const PAGES = {};
 
     PAGES.home = () => {
-      const popular = ITEMS.slice().sort((a, b) => b.rented - a.rented).slice(0, 8);
-      const hero = item('a6400');
+      const popular = ITEMS.slice().sort((a, b) => b.rented - a.rented).slice(0, 4);
       return `
   <section class="hero"><div class="wrap hero-in">
     <div class="hero-copy">
-      <h1>Sewa alat media untuk acara kampus? <span class="hl">Disini tempatnya!</span></h1>
+      <h1>Sewa alat media untuk acara kampus? <span class="hl">Di sini tempatnya!</span></h1>
       <p>Cari kamera, lensa, mic, dan lighting. Cek ketersediaan real-time, booking dalam hitungan menit.</p>
       <form class="hero-search" data-form="heroSearch" role="search">
         ${ic('search')}<input id="hero-q" name="q" placeholder="Cari Sony A6400, Rode Wireless GO, softbox…" aria-label="Cari alat">
         <button class="btn btn-accent" type="submit">Cari Alat</button>
       </form>
       <div class="hero-cta"><button class="btn btn-light btn-lg" data-go="reco">${ic('sparkles')} Rekomendasi Pilihan</button><small>Jawab 3 pertanyaan, dapat paket alat yang pas dengan kegiatan dan budget.</small></div>
-      <div class="hero-tags">Populer: ${['Sony A6400', 'Wireless GO', 'Softbox', 'Gimbal'].map(t => `<button data-act="heroTag" data-q="${t}">${t}</button>`).join('')}</div>
-      <div class="hero-stats"><div><b>23</b><small>alat siap sewa</small></div><div><b>±3 menit</b><small>proses ambil di toko</small></div></div>
     </div>
     <div class="hero-visual"><div class="vf">
       <i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
-      <div class="vf-top"><span>4K 30p</span><span>AF-C</span><span>▮▮▮▯</span></div>
       <div class="vf-art"><svg viewBox="0 0 120 90">${ART.camera}</svg></div>
       <div class="vf-read"><span class="rec">● REC</span><span>ISO 400</span><span>f/1.8</span><span>1/125</span></div>
-      <div class="float-card fc-2"><span class="fi">${ic('calendar')}</span><div><b>${hero.name}</b>Tersedia hari ini · ${rp(hero.price)}/hari</div></div>
     </div></div>
   </div></section>
 
+  <section class="perks"><div class="wrap perks-in">
+    ${[['sparkles', 'Rekomendasi pintar', 'Paket sesuai kegiatan dan budget.'],
+      ['calendar', 'Ketersediaan real-time', 'Tanggal penuh langsung terlihat.'],
+      ['zap', 'Ambil & kembali cepat', 'Proses di toko sekitar 3 menit.']]
+        .map(b => `<div class="perk"><span class="perk-ic">${ic(b[0])}</span><div><b>${b[1]}</b><small>${b[2]}</small></div></div>`).join('')}
+  </div></section>
+
   <section class="sec"><div class="wrap">
-    <div class="sec-head"><div><span class="kicker">Kategori</span><h2>Mau sewa apa hari ini?</h2></div><button class="btn btn-outline" data-go="catalog">Lihat semua alat ${ic('arrowR', 'sm')}</button></div>
-    <div class="cats">${CATS.map(c => { const list = ITEMS.filter(i => i.cat === c.id); return `<button class="cat" style="--tint:var(${c.tint})" data-go="catalog" data-cat="${c.id}"><span class="cat-ic">${ic(c.icon)}</span><b>${c.name}</b><span>${c.desc}</span><small>${list.length} alat · mulai ${rp(Math.min(...list.map(i => i.price)))}</small></button>`; }).join('')}</div>
+    <div class="sec-head"><div><span class="kicker">Kategori</span><h2>Mau sewa apa hari ini?</h2></div></div>
+    <div class="cats">${CATS.map(c => { const list = ITEMS.filter(i => i.cat === c.id); return `<button class="cat" style="--tint:var(${c.tint})" data-go="catalog" data-cat="${c.id}"><span class="cat-ic">${ic(c.icon)}</span><b>${c.name}</b><small>Mulai ${rp(Math.min(...list.map(i => i.price)))}</small></button>`; }).join('')}</div>
   </div></section>
 
   <section class="sec sec-alt"><div class="wrap">
@@ -5190,19 +5234,9 @@
     <div class="steps4">
       ${[['search', 'Pilih alat', 'Cari di katalog atau pakai fitur rekomendasi. Kalender menunjukkan tanggal yang masih kosong.'],
         ['card', 'Booking & bayar', 'Pilih tanggal, bayar via QRIS, e-wallet, atau transfer bank. Kode booking dan QR langsung terbit.'],
-        ['radio', 'Ambil, scan RFID', 'Tunjukkan QR di toko. Alat dipindai di gerbang RFID dan tercatat otomatis dalam hitungan detik.'],
-        ['rotate', 'Kembalikan', 'Kembalikan sebelum batas waktu. Scan RFID mencatat pengembalian, deposit kembali maksimal 1×24 jam.']]
+        ['store', 'Ambil di toko', 'Tunjukkan QR booking di toko. Staf menyerahkan alat, selesai sekitar 3 menit.'],
+        ['rotate', 'Kembalikan', 'Kembalikan ke toko sebelum batas waktu. Deposit kembali maksimal 1×24 jam.']]
           .map((s, i) => `<div class="step ${i === 2 ? 'rf' : ''}"><div class="sn">${ic(s[0], 'lg')}<em>${i + 1}</em></div><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join('')}
-    </div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="sec-head"><div><span class="kicker">Kenapa kami</span><h2>Dibuat untuk sewa yang cepat dan bisa dipercaya</h2></div></div>
-    <div class="benefits">
-      ${[['sparkles', 'Rekomendasi pintar', 'Jawab jenis kegiatan, pengalaman, dan budget. Sistem meracik paket alat yang saling cocok, lengkap dengan alasannya.'],
-        ['calendar', 'Ketersediaan real-time', 'Kalender setiap alat menandai tanggal yang sudah penuh, jadi kamu tahu pasti sebelum datang ke toko.'],
-        ['zap', 'Ambil & kembali kilat', 'Tag RFID di setiap unit menggantikan ceklis manual. Serah terima selesai dalam ±3 menit dan tercatat sebagai bukti.']]
-          .map(b => `<div class="benefit"><div class="bi">${ic(b[0])}</div><h3>${b[1]}</h3><p>${b[2]}</p></div>`).join('')}
     </div>
   </div></section>
 
@@ -5214,9 +5248,7 @@
   <section class="sec"><div class="wrap faq">
     <div><span class="kicker">FAQ</span><h2 style="font-size:clamp(26px,3vw,36px);font-weight:800;margin-top:10px">Pertanyaan yang sering ditanyakan</h2><p class="muted" style="margin-top:10px">Masih bingung? Chat kami di WhatsApp ${STORE.wa}.</p></div>
     <div>${FAQ.map((f, i) => `<details class="qa" ${i === 0 ? 'open' : ''}><summary>${f[0]}${ic('chevD')}</summary><p>${f[1]}</p></details>`).join('')}</div>
-  </div></section>
-
-  <section class="wrap"><div class="cta-band"><div><h2>Bingung pilih alat? Ceritakan kegiatanmu, kami racik paketnya.</h2><p>Gratis, kurang dari satu menit.</p></div><button class="btn btn-accent btn-lg" data-go="reco">${ic('sparkles')} Bantu Saya Memilih</button></div></section>`;
+  </div></section>`;
     };
 
     /* Catalog */
@@ -5249,7 +5281,7 @@
       return `<div class="wrap page">
     ${crumbs([['Beranda', 'home'], ['Katalog']])}
     <h1 class="page-title">Katalog Alat</h1>
-    <p class="page-sub">Semua unit dicek setelah dipakai dan punya tag RFID. Harga per hari, belum termasuk deposit yang dikembalikan.</p>
+    <p class="page-sub">Semua unit dicek setelah dipakai. Harga per hari, belum termasuk deposit yang dikembalikan.</p>
     <div class="cat-layout">
       <aside class="filters ${S.ui.filters ? 'open' : ''}" id="filters" aria-label="Filter">
         <div class="f-head"><b>Filter</b><button class="link-btn" data-act="resetFilters">Atur ulang</button></div>
@@ -5317,15 +5349,11 @@
       <div class="sum-row"><span>${rp(it.price)} × ${b.qty} unit × ${days || 0} hari</span><span class="num">${rp(sub)}</span></div>
       <div class="sum-row"><span>Deposit keamanan<small>Dikembalikan setelah alat dicek</small></span><span class="num">${rp(it.deposit * b.qty)}</span></div>
     </div>
-    <button class="btn btn-accent btn-lg btn-block" data-act="addToCart" ${ok && avail ? '' : 'disabled'}>${ic('cart')} Tambah ke Keranjang</button>
-    <button class="btn btn-outline btn-block" data-act="rentNow" ${ok && avail ? '' : 'disabled'}>Sewa Sekarang</button>
-    <div class="panel-foot">${ic('radio')}<span>Unit ber-tag RFID. Saat diambil dan dikembalikan, alat cukup dipindai di gerbang dan tercatat otomatis.</span></div>`;
+    <button class="btn btn-accent btn-lg btn-block" data-act="addToCart" ${ok && avail ? '' : 'disabled'}>${ic('cart')} Tambah ke Keranjang</button>`;
     }
-    const INCL_IC = s => /baterai/i.test(s) ? 'battery' : /charger|kabel|daya/i.test(s) ? 'plug' : /kartu sd|sd /i.test(s) ? 'sd' : /tas|case|pouch/i.test(s) ? 'bag' : 'check';
     function galleryMain(it) {
       const v = S.book.view;
-      if (v === 2) return `<div class="kit">${it.incl.map(x => `<div class="kit-it">${ic(INCL_IC(x))}<span>${esc(x)}</span></div>`).join('')}</div>`;
-      return art(it, v === 1 ? 'flip' : '', true);
+      return art(it, v === 1 ? 'flip' : '');
     }
     PAGES.item = () => {
       const it = item(S.params.id);
@@ -5337,7 +5365,7 @@
       <div class="stack" style="gap:30px">
         <div>
           <div class="gallery-main" id="gal">${galleryMain(it)}</div>
-          <div class="thumbs" role="tablist" aria-label="Foto alat">${['Tampak depan', 'Tampak samping', 'Kelengkapan'].map((t, i) => `<button class="${S.book.view === i ? 'on' : ''}" data-act="galView" data-v="${i}" aria-label="${t}" role="tab" aria-selected="${S.book.view === i}">${i === 2 ? `<div class="kit-th">${ic('package')}</div>` : art(it, i === 1 ? 'flip' : '')}</button>`).join('')}</div>
+          <div class="thumbs" role="tablist" aria-label="Foto alat">${['Tampak depan', 'Tampak samping'].map((t, i) => `<button class="${S.book.view === i ? 'on' : ''}" data-act="galView" data-v="${i}" aria-label="${t}" role="tab" aria-selected="${S.book.view === i}">${art(it, i === 1 ? 'flip' : '')}</button>`).join('')}</div>
         </div>
         <div class="d-head">
           <div class="row" style="flex-wrap:wrap"><span class="pill pill-navy">${ic(cat.icon)}${cat.name}</span><span class="pill">${it.brand}</span>${it.booked.includes(0) ? `<span class="pill pill-warn">Penuh hari ini</span>` : `<span class="pill pill-ok">Tersedia hari ini</span>`}</div>
@@ -5345,7 +5373,7 @@
           <p class="muted" style="font-size:16px;max-width:640px">${it.desc}</p>
         </div>
         <section><h3 style="font-size:19px;margin-bottom:10px">Spesifikasi</h3>
-          <dl class="specs" style="margin:0">${it.specs.map(s => `<div><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}<div><dt>Tag RFID</dt><dd class="mono" style="font-size:13px">${tagId(it.id, 0)}</dd></div></dl></section>
+          <dl class="specs" style="margin:0">${it.specs.map(s => `<div><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('')}</dl></section>
         <section><h3 style="font-size:19px;margin-bottom:12px">Kelengkapan yang kamu terima</h3>
           <div class="incl">${it.incl.map(x => `<span>${ic('check')}${esc(x)}</span>`).join('')}</div></section>
         <section class="card card-pad"><div class="between" style="margin-bottom:12px;flex-wrap:wrap"><h3 style="font-size:19px">Kalender ketersediaan</h3><span class="muted" style="font-size:13.5px">Diperbarui real-time dari sistem toko</span></div>
@@ -5354,7 +5382,7 @@
       <aside class="card panel sticky" id="panel">${panelHTML(it)}</aside>
     </div>
     <section class="sec" style="padding-bottom:0"><div class="sec-head"><div><span class="kicker">Sering disewa bersama</span><h2>Lengkapi ${esc(it.name)}</h2></div></div>
-      <div class="together">${it.with.map(id => pcard(item(id))).join('')}</div></section>
+      <div class="together">${it.with.slice(0, 3).map(id => pcard(item(id))).join('')}</div></section>
   </div>`;
     };
     function rerenderBook() {
@@ -5457,7 +5485,6 @@
   <h1 class="page-title">Paket Sewa</h1>
   <p class="page-sub">Kombinasi alat yang sudah kami uji saling cocok, dari mount lensa sampai audio. Harga paket 10% lebih hemat dari sewa satuan.</p>
   <div class="pkgs" style="margin-top:28px">${PACKS.map(pkgCard).join('')}</div>
-  <div class="cta-band" style="margin-top:40px"><div><h2>Kegiatanmu tidak ada di daftar?</h2><p>Asisten rekomendasi meracik paket dari kegiatan, pengalaman, dan budget-mu.</p></div><button class="btn btn-accent btn-lg" data-go="reco">${ic('sparkles')} Bantu Saya Memilih</button></div>
 </div>`;
 
     /* Customize package */
@@ -5506,26 +5533,18 @@
     PAGES.how = () => `<div class="wrap page">
   ${crumbs([['Beranda', 'home'], ['Cara Kerja']])}
   <h1 class="page-title">Cara kerja sewa</h1>
-  <p class="page-sub">Semua proses online kecuali serah terima alat. Di toko, gerbang RFID mencatat setiap unit yang keluar dan masuk, jadi tidak ada lagi ceklis kertas.</p>
+  <p class="page-sub">Semua proses online kecuali serah terima alat, yang cukup sekitar 3 menit di toko.</p>
   <div class="how-grid" style="margin-top:28px">
     ${[['Pilih alat', 'Cari di katalog atau biarkan asisten rekomendasi memilihkan paket.', ['Filter kategori, merek, harga, dan tanggal', 'Kalender menandai tanggal penuh', 'Paket hemat 10%']],
       ['Booking & bayar', 'Tentukan tanggal dan jam ambil, lalu bayar online.', ['QRIS, GoPay, OVO, DANA, ShopeePay, atau virtual account', 'Biaya sewa + deposit keamanan', 'Kode booking & QR terbit instan']],
-      ['Ambil di toko, scan RFID', 'Tunjukkan QR booking. Staf meletakkan alat di gerbang RFID di meja pengambilan.', ['Semua tag terbaca dalam ±3 detik', 'Waktu dan daftar alat tercatat otomatis', 'Notifikasi “Scan RFID berhasil” masuk ke akunmu']],
-      ['Pakai lalu kembalikan', 'Pantau sisa waktu sewa di halaman pesanan, kembalikan sebelum batas.', ['Pengingat sehari sebelum batas waktu', 'Scan RFID saat kembali mencatat jam pengembalian', 'Deposit kembali maksimal 1×24 jam']]]
+      ['Ambil di toko', 'Tunjukkan QR booking dan identitas asli di meja pengambilan.', ['Staf menyerahkan alat yang sudah dicek', 'Waktu dan daftar alat tercatat di pesananmu', 'Selesai sekitar 3 menit']],
+      ['Pakai lalu kembalikan', 'Pantau sisa waktu sewa di halaman pesanan, kembalikan sebelum batas.', ['Pengingat sehari sebelum batas waktu', 'Jam pengembalian tercatat di pesananmu', 'Deposit kembali maksimal 1×24 jam']]]
         .map((s, i) => `<div class="card how-card ${i === 2 ? 'rf' : ''}"><span class="hn">${i + 1}</span><div><h3>${s[0]}</h3><p class="muted">${s[1]}</p><ul>${s[2].map(x => `<li>${x}</li>`).join('')}</ul></div></div>`).join('')}
   </div>
-  <section class="sec" style="padding-bottom:20px"><div class="rfid-demo">
-    <div><span class="kicker">Teknologi RFID</span><h2 style="font-size:clamp(26px,3vw,34px);font-weight:800;margin:10px 0 14px">Setiap unit punya identitas sendiri</h2>
-      <p class="muted" style="font-size:16px">Tag RFID pasif ditempel di body kamera, lensa, dan aksesori utama. Saat melewati gerbang, pembaca menangkap semua tag sekaligus tanpa perlu dipindai satu per satu. Log ini juga menjadi bukti serah terima, berguna untuk LPJ panitia acara.</p></div>
-    <div class="card" style="overflow:hidden"><div class="rfid-head" style="padding:14px 16px">${ic('radio')} Contoh log · Gerbang 1 · Meja pengambilan</div>
-      ${['a6400', 'fe50', 'wgo2'].map((id, i) => `<div class="rfid-row"><span><b>${item(id).name}</b><br><span class="mono">${tagId(id, 0)}</span></span><span class="mono">10.12.0${i + 3}</span></div>`).join('')}
-      <div class="rfid-row" style="background:var(--surface-2)"><span><b>3 dari 3 alat terdeteksi</b></span><span class="pill pill-ok">${ic('check')} Lengkap</span></div></div>
-  </div></section>
-  <section class="sec" style="padding-bottom:0"><div class="two-col" style="grid-template-columns:1fr 1fr;margin-top:0">
+  <section class="sec" style="padding-bottom:0">
     <div class="card card-pad"><h3 style="font-size:20px;margin-bottom:16px">Denda keterlambatan</h3>
       <table class="fee-table"><tr><td>Per jam keterlambatan</td><td>10% tarif harian</td></tr><tr><td>Maksimal per hari</td><td>150% tarif harian</td></tr><tr><td>Contoh: Sony A6400 telat 3 jam</td><td>${rp(150000 * 0.3)}</td></tr><tr><td>Dipotong dari</td><td>Deposit</td></tr></table></div>
-    <div class="card card-pad"><h3 style="font-size:20px;margin-bottom:16px">Syarat & ketentuan</h3><ol class="terms">${TERMS.slice(0, 3).map(t => `<li><div><b>${t[0]}</b><p>${t[1]}</p></div></li>`).join('')}</ol></div>
-  </div></section>
+  </section>
 </div>`;
 
     /* Auth */
@@ -5534,7 +5553,7 @@
       const side = `<div class="auth-side"><span class="hero-chip">${ic('shield')} Sekali verifikasi, sewa berkali-kali</span>
     <h2>Masuk untuk booking, lacak pesanan, dan dapat pengingat pengembalian.</h2>
     <ul><li>${ic('grad')}<div><b>Mahasiswa cukup pakai KTM</b>Verifikasi identitas adalah syarat sewa untuk melindungi alat dan penyewa.</div></li>
-      <li>${ic('bell')}<div><b>Notifikasi otomatis</b>Pengingat ambil, pengingat kembali H-1, dan konfirmasi setiap scan RFID.</div></li>
+      <li>${ic('bell')}<div><b>Notifikasi otomatis</b>Pengingat ambil, pengingat kembali H-1, dan konfirmasi serah terima.</div></li>
       <li>${ic('lock')}<div><b>Data aman</b>Foto identitas hanya dipakai untuk verifikasi dan tidak ditampilkan ke pihak lain.</div></li></ul></div>`;
       let body;
       if (a.tab === 'login') {
@@ -5587,11 +5606,10 @@
     PAGES.cart = () => {
       const c = S.cart;
       if (!c.lines.length) return `<div class="wrap page">${crumbs([['Beranda', 'home'], ['Keranjang']])}<h1 class="page-title">Keranjang</h1>
-    ${emptyState('cart', 'Keranjangmu masih kosong', 'Mulai dari katalog atau biarkan kami merekomendasikan paket.', '<div class="row" style="flex-wrap:wrap;justify-content:center"><button class="btn btn-navy" data-go="catalog">Buka katalog</button><button class="btn btn-accent" data-go="reco">' + ic('sparkles', 'sm') + ' Bantu Saya Memilih</button></div>')}</div>`;
+    ${emptyState('cart', 'Keranjangmu masih kosong', 'Mulai dari katalog atau biarkan kami merekomendasikan paket.', '<div class="row" style="flex-wrap:wrap;justify-content:center"><button class="btn btn-navy" data-go="catalog">Buka katalog</button><button class="btn btn-accent" data-go="reco">' + ic('sparkles', 'sm') + ' Rekomendasi Pilihan</button></div>')}</div>`;
       const days = cartDays(), p = calc(c.lines, days);
       const bad = c.lines.filter(l => !isAvail(item(l.id), c.start, c.end));
       return `<div class="wrap page">
-    ${crumbs([['Beranda', 'home'], ['Keranjang']])}
     ${ckSteps(1)}
     <h1 class="page-title">Keranjang</h1>
     <div class="two-col">
@@ -5610,16 +5628,14 @@
             <label class="field"><span>Tanggal kembali</span><input type="date" class="inp" id="ct-end" data-ch="ctEnd" value="${c.end}" min="${iso(addDays(parseIso(c.start), 1))}"></label>
             <label class="field"><span>Jam ambil & kembali</span><select class="inp" id="ct-time" data-ch="ctTime">${TIMES.map(t => `<option ${c.time === t ? 'selected' : ''}>${t}</option>`).join('')}</select></label>
           </div>
-          <p class="muted" style="font-size:14px">${days} hari sewa · ambil ${fDate(parseIso(c.start))} pukul ${c.time}, kembali ${fDate(parseIso(c.end))} pukul ${c.time}</p>
           ${bad.length ? `<div class="note bad">${ic('alert')}<span>${bad.map(l => item(l.id).name).join(', ')} penuh di tanggal ini. Ganti tanggal atau hapus alat tersebut.</span></div>` : ''}
-          <h3 style="margin-top:6px">Metode pengambilan</h3>
-          <div class="radio-row"><button class="radio-card on" type="button"><span class="dot"></span><span><b>Ambil di toko</b><small>Gratis · scan RFID ±3 menit</small></span></button><button class="radio-card" type="button" disabled><span class="dot"></span><span><b>Antar ke kampus</b><small>Segera hadir</small></span></button></div>
+          <h3 style="margin-top:6px">Ambil di toko</h3>
           <div class="store-box">${ic('store')}<div><b>${STORE.name}</b><p class="muted" style="font-size:14px">${STORE.addr}<br>${STORE.hours.join(' · ')}</p></div></div>
         </section>
       </div>
       <aside class="card card-pad sticky">${summaryHTML(p, days)}
         <button class="btn btn-accent btn-lg btn-block" style="margin-top:16px" data-act="toCheckout" ${bad.length ? 'disabled' : ''}>Lanjut ke Checkout ${ic('arrowR', 'sm')}</button>
-        <button class="btn btn-outline btn-block" style="margin-top:8px" data-go="catalog">Tambah alat lain</button></aside>
+        </aside>
     </div></div>`;
     };
     function summaryHTML(p, days) {
@@ -5641,7 +5657,6 @@
       const days = cartDays(), p = calc(c.lines, days);
       const verified = u.verified === 'verified';
       return `<div class="wrap page">
-    ${crumbs([['Beranda', 'home'], ['Keranjang', 'cart'], ['Checkout']])}
     ${ckSteps(2)}
     <h1 class="page-title">Checkout</h1>
     <div class="two-col">
@@ -5655,9 +5670,6 @@
         <section class="card card-pad stack" style="gap:14px"><h3>Pengambilan</h3>
           <div class="store-box">${ic('store')}<div><b>Ambil di toko · ${fDate(parseIso(c.start))}, ${c.time}</b><p class="muted" style="font-size:14px">${STORE.addr}</p></div></div>
           <div class="note">${ic('clock')}<span>Kembalikan paling lambat <b>${fDate(parseIso(c.end))}, ${c.time}</b>. Lewat dari itu dikenakan denda 10% tarif harian per jam.</span></div>
-        </section>
-        <section class="card card-pad"><h3>Alat yang disewa</h3>
-          ${c.lines.map(l => { const it = item(l.id); return `<div class="line">${art(it, 'thumb')}<div class="line-main"><b>${l.qty > 1 ? l.qty + '× ' : ''}${esc(it.name)}</b><small>${it.incl.slice(0, 3).join(' · ')}</small></div><span class="line-sub num">${rp(it.price * l.qty * days)}</span></div>`; }).join('')}
         </section>
         <label class="chk card card-pad" style="align-items:flex-start"><input type="checkbox" id="agree" data-ch="agree" ${S.agree ? 'checked' : ''}><span>Saya setuju dengan <button type="button" class="link-btn" data-act="showTerms">syarat & ketentuan sewa</button>, termasuk denda keterlambatan dan tanggung jawab kerusakan.</span></label>
       </div>
@@ -5685,14 +5697,12 @@
       else if (m.group === 'E-Wallet') inst = `<div class="stack" style="gap:12px"><label class="field" style="max-width:320px"><span>Nomor ${m.name}</span><input class="inp" id="ew-no" value="${esc(S.user.phone || '')}" inputmode="tel"></label><ol class="ol"><li>Tagihan dikirim ke aplikasi ${m.name} setelah kamu menekan tombol bayar.</li><li>Buka notifikasi di aplikasi, periksa nominal, lalu konfirmasi dengan PIN.</li></ol></div>`;
       else inst = `<div class="stack" style="gap:6px"><span class="muted" style="font-size:14px">Nomor Virtual Account ${m.name}</span><div class="row" style="flex-wrap:wrap"><span class="va" id="va-no">${va}</span><button class="btn btn-outline btn-sm" data-act="copy" data-text="${va.replace(/\s/g, '')}">${ic('copy', 'sm')} Salin</button></div><ol class="ol"><li>Buka m-banking atau ATM ${m.name}, pilih Transfer › Virtual Account.</li><li>Masukkan nomor di atas. Nama penerima: MEDIA EQUIPMENT RENTAL.</li><li>Pastikan nominal ${rp(o.total)} lalu konfirmasi.</li></ol></div>`;
       return `<div class="wrap page">
-    ${crumbs([['Beranda', 'home'], ['Checkout', 'checkout'], ['Pembayaran']])}
     ${ckSteps(3)}
     <div class="between" style="flex-wrap:wrap"><h1 class="page-title">Pembayaran</h1><span class="pill pill-warn" style="font-size:13.5px;padding:7px 14px">${ic('clock')} Bayar dalam <span class="cd-pay" data-cd="${S.pay.deadline}" data-fmt="ms">${ms2(S.pay.deadline - Date.now())}</span></span></div>
     <div class="two-col">
       <div class="stack">
         <section class="card card-pad pm-group">${groups.map(g => `<h4>${g}</h4><div class="pm-opts">${Object.entries(PM).filter(([, v]) => v.group === g).map(([k, v]) => `<button class="pm ${S.pay.method === k ? 'on' : ''}" data-act="payMethod" data-v="${k}" aria-pressed="${S.pay.method === k}"><span class="logo-sq">${v.sq}</span>${v.name}</button>`).join('')}</div>`).join('')}</section>
         <section class="card card-pad"><h3 style="margin-bottom:16px">Cara bayar · ${m.name}</h3>${inst}</section>
-        <div class="demo"><h4>${ic('info', 'sm')} Simulasi pembayaran</h4><p>Prototipe ini tidak memproses uang sungguhan. Tekan tombol di samping untuk mensimulasikan pembayaran berhasil.</p></div>
       </div>
       <aside class="card card-pad sticky">
         <div class="between" style="margin-bottom:12px"><span class="muted">Kode booking</span><b class="mono">${o.code}</b></div>
@@ -5703,6 +5713,7 @@
         <div class="sum-row total"><span>Total</span><span class="num">${rp(o.total)}</span></div>
         <button class="btn btn-accent btn-lg btn-block" style="margin-top:16px" data-act="paySim">${ic('check')} ${m.group === 'E-Wallet' ? 'Kirim tagihan & bayar' : 'Saya sudah bayar'}</button>
         <button class="btn btn-outline btn-block" style="margin-top:8px" data-act="payLater">Bayar nanti</button>
+        <p class="muted" style="font-size:12.5px;margin-top:10px;text-align:center">Simulasi: tidak ada uang sungguhan yang diproses.</p>
       </aside>
     </div></div>`;
     };
@@ -5719,7 +5730,6 @@
       <div class="ticket-qr">${qrSVG(o.code)}<span class="code">${o.code}</span><small class="muted">Tunjukkan QR ini di kasir</small></div>
       <div class="ticket-info">
         <dl class="kv" style="margin:0"><dt>Ambil</dt><dd>${fDT(o.pickupAt)}</dd><dt>Kembali</dt><dd>${fDT(o.dueAt)}</dd><dt>Lokasi</dt><dd>${STORE.addr}</dd><dt>Alat</dt><dd>${o.lines.map(l => (l.qty > 1 ? l.qty + '× ' : '') + item(l.id).name).join(', ')}</dd></dl>
-        <div class="note">${ic('radio')}<span>Di toko, alat diletakkan di gerbang RFID. Waktu dan daftar alat tercatat otomatis dan muncul di halaman pesananmu.</span></div>
         <div class="row" style="flex-wrap:wrap"><button class="btn btn-navy" data-go="order" data-code="${o.code}">Lihat status pesanan</button><button class="btn btn-outline" data-act="copy" data-text="${o.code}">${ic('copy', 'sm')} Salin kode</button></div>
       </div>
     </div></div></div>`;
@@ -5757,9 +5767,9 @@
 
     /* Order detail */
     function rfidBox(e) {
-      return `<div class="rfid-box"><div class="rfid-head">${ic('radio')} Tercatat via RFID · ${e.gate} · ${fDT(e.at)}</div>
-    ${e.tags.map(t => `<div class="rfid-row"><span>${ic('check', 'sm')} ${esc(t.name)}</span><span class="mono">${t.tag}</span></div>`).join('')}
-    <div class="rfid-row" style="background:var(--surface-2)"><b>${e.tags.length} dari ${e.tags.length} alat terdeteksi</b><span class="pill pill-ok">Lengkap</span></div></div>`;
+      return `<div class="rfid-box"><div class="rfid-head">${ic('check')} ${e.gate} · ${fDT(e.at)}</div>
+    ${e.tags.map(t => `<div class="rfid-row"><span>${ic('check', 'sm')} ${esc(t.name)}</span></div>`).join('')}
+    <div class="rfid-row" style="background:var(--surface-2)"><b>${e.tags.length} dari ${e.tags.length} alat tercatat</b><span class="pill pill-ok">Lengkap</span></div></div>`;
     }
     function stepBody(o, k, state) {
       const ev = o.events[k];
@@ -5770,10 +5780,10 @@
       if (k === 'pending') p = state === 'done' ? `Dibayar via ${esc(o.method || '—')}.` : 'Selesaikan pembayaran agar alat dikunci untuk tanggalmu.';
       if (k === 'confirmed') p = state === 'done' ? 'Pembayaran diterima, alat dikunci untuk tanggalmu.' : state === 'cur' ? 'Pembayaran diterima. Staf sedang menyiapkan dan mengecek alat.' : '';
       if (k === 'ready') p = state === 'cur' ? `Alat sudah dicek dan siap. Datang ${fDT(o.pickupAt)} dan tunjukkan QR booking.` : state === 'done' ? 'Alat dicek lengkap dan disiapkan di meja pengambilan.' : `Perkiraan: ${fDT(o.pickupAt - 3 * HOUR)}`;
-      if (k === 'pickedup') p = state === 'done' && out ? rfidBox(out) : `Jadwal ambil: ${fDT(o.pickupAt)}. Alat akan dipindai di gerbang RFID.`;
-      if (k === 'inuse') p = state === 'cur' ? (Date.now() > o.dueAt ? `<span style="color:var(--bad);font-weight:700">Batas pengembalian ${fDT(o.dueAt)} sudah lewat.</span>` : `Sisa waktu <b class="mono" data-cd="${o.dueAt}">${hms(o.dueAt - Date.now())}</b> · kembali paling lambat ${fDT(o.dueAt)}`) : state === 'done' ? `Dipakai ${o.days} hari.` : `Sampai ${fDT(o.dueAt)}`;
+      if (k === 'pickedup') p = state === 'done' && out ? rfidBox(out) : `Jadwal ambil: ${fDT(o.pickupAt)}.`;
+      if (k === 'inuse') p = state === 'cur' ? `Kembali paling lambat ${fDT(o.dueAt)}` : state === 'done' ? `Dipakai ${o.days} hari.` : `Sampai ${fDT(o.dueAt)}`;
       if (k === 'returned') p = state === 'done' || state === 'cur' ? ((inn ? rfidBox(inn) : '') + (state === 'cur' ? '<p style="margin-top:8px">Staf sedang mengecek kondisi alat (±30 menit).</p>' : '')) : `Batas: ${fDT(o.dueAt)}`;
-      if (k === 'completed') p = state === 'done' ? `Deposit ${rp(o.deposit - (o.lateFee || 0))} dikembalikan ke rekening refund${o.lateFee ? ` (dipotong denda ${rp(o.lateFee)})` : ''}.` : 'Deposit dikembalikan maksimal 1×24 jam setelah alat dicek.';
+      if (k === 'completed') p = state === 'done' ? `Deposit ${rp(Math.max(0, o.deposit - (o.lateFee || 0) - (o.damageFee || 0)))} dikembalikan ke rekening refund${o.lateFee ? ` (dipotong denda ${rp(o.lateFee)})` : ''}${o.damageFee ? ` (dipotong biaya perbaikan ${rp(o.damageFee)})` : ''}.` : 'Deposit dikembalikan maksimal 1×24 jam setelah alat dicek.';
       return `<b>${title}</b>${t}<div style="font-size:14px;color:var(--ink-2);margin-top:3px">${p}</div>`;
     }
     PAGES.order = () => {
@@ -5785,13 +5795,11 @@
       let alert = '';
       if (o.status === 'inuse' && rem < 0) alert = `<div class="alert bad">${ic('alert')}<div><b>Terlambat ${li.hours} jam dari batas pengembalian</b><p>Estimasi denda saat ini ${rp(li.fee)} dan terus bertambah 10% tarif harian per jam. Segera kembalikan ke toko.</p></div></div>`;
       else if (o.status === 'inuse' && rem < 36 * HOUR) alert = `<div class="alert warn">${ic('clock')}<div><b>Batas pengembalian ${fDT(o.dueAt)}</b><p>Sisa sekitar ${Math.floor(rem / HOUR)} jam. Kembalikan tepat waktu agar deposit utuh. Jam buka hari ini sampai 21.00.</p></div></div>`;
-      else if (o.status === 'ready') alert = `<div class="alert info">${ic('store')}<div><b>Siap diambil ${fDT(o.pickupAt)}</b><p>Tunjukkan QR booking dan ${S.user.idType || 'KTM/KTP'} asli di toko Kertajaya.</p></div></div>`;
-      else if (o.status === 'pending') alert = `<div class="alert warn">${ic('card')}<div><b>Menunggu pembayaran</b><p>Alat belum dikunci sampai pembayaran diterima.</p></div></div>`;
       const sim = {
         pending: ['payOrder', 'card', 'Bayar sekarang'],
         confirmed: ['simReady', 'package', 'Tandai alat siap diambil'],
-        ready: ['simPickup', 'radio', 'Scan RFID pengambilan'],
-        inuse: ['simReturn', 'radio', 'Scan RFID pengembalian'],
+        ready: ['simPickup', 'store', 'Simulasikan pengambilan'],
+        inuse: ['simReturn', 'rotate', 'Simulasikan pengembalian'],
         returned: ['simComplete', 'wallet', 'Selesaikan & kembalikan deposit'],
       }[o.status];
       return `<div class="wrap page">
@@ -5808,15 +5816,11 @@
           <ol class="tl">${STEPS.map((s, i) => { const st = o.status === 'completed' ? 'done' : i < cur ? 'done' : i === cur ? 'cur' : 'todo'; return `<li class="${st}"><span class="mk">${st === 'done' ? ic('check') : st === 'cur' ? ic(s.k === 'inuse' ? 'clock' : 'arrowR') : ''}</span><div class="tl-body">${stepBody(o, s.k, st)}</div></li>`; }).join('')}</ol>
         </section>
         <section class="card card-pad"><h3 style="margin-bottom:6px">Alat dalam pesanan</h3>
-          ${o.lines.map(l => { const it = item(l.id); return `<div class="line">${art(it, 'thumb')}<div class="line-main"><b>${l.qty > 1 ? l.qty + '× ' : ''}${esc(it.name)}</b><small>Kelengkapan: ${it.incl.join(', ')}</small><small class="mono">${Array.from({ length: l.qty }, (_, i) => tagId(l.id, i)).join(' · ')}</small></div><span class="line-sub num">${rp(it.price * l.qty * o.days)}</span></div>`; }).join('')}</section>
-        <section class="card card-pad"><h3 style="margin-bottom:12px">Log RFID</h3>
-          ${o.rfid.length ? `<div class="tbl-wrap"><table class="log-table"><thead><tr><th>Waktu</th><th>Kejadian</th><th>Gerbang</th><th>Alat</th></tr></thead><tbody>${o.rfid.map(e => `<tr><td class="mono">${fDT(e.at)}</td><td><span class="pill ${e.type === 'out' ? 'pill-navy' : 'pill-ok'}">${e.type === 'out' ? 'Keluar' : 'Masuk'}</span></td><td>${e.gate}</td><td>${e.tags.length} tag terbaca</td></tr>`).join('')}</tbody></table></div>`
-          : `<p class="muted" style="font-size:14px">Belum ada scan. Log muncul otomatis saat alat dipindai di gerbang toko.</p>`}
-        </section>
+          ${o.lines.map(l => { const it = item(l.id); return `<div class="line">${art(it, 'thumb')}<div class="line-main"><b>${l.qty > 1 ? l.qty + '× ' : ''}${esc(it.name)}</b><small>Kelengkapan: ${it.incl.join(', ')}</small></div><span class="line-sub num">${rp(it.price * l.qty * o.days)}</span></div>`; }).join('')}</section>
         ${o.status === 'completed' ? reviewHTML(o) : ''}
       </div>
       <aside class="stack sticky">
-        ${o.status === 'inuse' ? `<div class="cd-card"><small>${rem > 0 ? 'Sisa waktu sewa' : 'Lewat batas waktu'}</small><div class="countdown" data-cd="${o.dueAt}">${hms(rem)}</div><div class="lbl">JAM : MENIT : DETIK</div><p style="margin-top:10px;font-size:14px;opacity:.85">Kembali paling lambat ${fDT(o.dueAt)}</p></div>` : ''}
+        ${o.status === 'inuse' ? `<div class="cd-card"><small>${rem > 0 ? 'Sisa waktu sewa' : 'Lewat batas waktu'}</small><div class="countdown" data-cd="${o.dueAt}">${hms(rem)}</div><div class="lbl">JAM : MENIT : DETIK</div></div>` : ''}
         ${['confirmed', 'ready', 'pending'].includes(o.status) ? `<div class="card card-pad" style="text-align:center"><h3 style="margin-bottom:12px">QR pengambilan</h3><div style="display:flex;justify-content:center">${qrSVG(o.code)}</div><p class="mono" style="font-weight:700;margin-top:10px">${o.code}</p><p class="muted" style="font-size:13px">${o.status === 'pending' ? 'Aktif setelah pembayaran diterima.' : 'Tunjukkan di kasir saat ambil alat.'}</p></div>` : ''}
         <div class="card card-pad"><h3 style="margin-bottom:10px">Rincian pembayaran</h3>
           <div class="sum-row"><span>Biaya sewa</span><span class="num">${rp(o.rent)}</span></div>
@@ -5824,10 +5828,11 @@
           <div class="sum-row"><span>Biaya layanan</span><span class="num">${rp(o.fee)}</span></div>
           <div class="sum-row"><span>Deposit<small>${o.status === 'completed' ? 'Sudah dikembalikan' : 'Ditahan sampai alat kembali'}</small></span><span class="num">${rp(o.deposit)}</span></div>
           ${o.lateFee ? `<div class="sum-row"><span>Denda keterlambatan</span><span class="num" style="color:var(--bad)">${rp(o.lateFee)}</span></div>` : ''}
+          ${o.damageFee ? `<div class="sum-row"><span>Biaya perbaikan</span><span class="num" style="color:var(--bad)">${rp(o.damageFee)}</span></div>` : ''}
           <div class="sum-row total"><span>Total dibayar</span><span class="num">${rp(o.total)}</span></div>
-          <p class="muted" style="font-size:13px;margin-top:6px">${o.method ? 'Metode: ' + esc(o.method) : 'Belum dibayar'}</p></div>
-        ${o.status !== 'completed' ? `<div class="card card-pad"><h3 style="margin-bottom:8px;display:flex;gap:8px;align-items:center">${ic('info', 'sm')} Denda keterlambatan</h3><p class="muted" style="font-size:14px">10% tarif harian per jam (${rp(o.daily * 0.1)}/jam untuk pesanan ini), maksimal 150% tarif harian per hari. Dipotong dari deposit.</p></div>` : ''}
-        ${sim ? `<div class="demo"><h4>${ic('zap', 'sm')} Mode demo</h4><p>Di sistem asli, status ini diperbarui oleh staf toko dan gerbang RFID. Klik untuk mensimulasikan langkah berikutnya.</p>
+          <p class="muted" style="font-size:13px;margin-top:6px">${o.method ? 'Metode: ' + esc(o.method) : 'Belum dibayar'}</p>
+          ${o.status !== 'completed' ? `<p class="muted" style="font-size:13px;margin-top:6px">Telat kembali kena denda ${rp(o.daily * 0.1)}/jam, dipotong dari deposit.</p>` : ''}</div>
+        ${sim ? `<div class="demo"><h4>${ic('zap', 'sm')} Mode demo</h4><p>Di sistem asli, status ini diperbarui oleh staf toko. Klik untuk mensimulasikan langkah berikutnya.</p>
           <button class="btn btn-navy btn-block" data-act="${sim[0]}" data-code="${o.code}">${ic(sim[1], 'sm')} ${sim[2]}</button>
           ${o.status === 'inuse' && rem > 0 ? `<button class="btn btn-outline btn-block btn-sm" style="margin-top:8px" data-act="simLate" data-code="${o.code}">Simulasikan terlambat 3 jam</button>` : ''}</div>` : ''}
       </aside>
@@ -5918,21 +5923,21 @@
     }
     function scanModal(o, type, done) {
       const e = rfidEntry(o, type, Date.now());
-      $('#modal').innerHTML = `<div class="modal-back" role="dialog" aria-modal="true" aria-label="Pemindaian RFID"><div class="modal">
-    <div class="scan-ring" id="scan-ring">${ic('radio')}</div>
-    <h3 id="scan-title" style="font-size:20px">Memindai tag RFID…</h3>
+      $('#modal').innerHTML = `<div class="modal-back" role="dialog" aria-modal="true" aria-label="Pencatatan alat"><div class="modal">
+    <div class="scan-ring" id="scan-ring">${ic('package')}</div>
+    <h3 id="scan-title" style="font-size:20px">Mencatat alat…</h3>
     <p class="muted" style="font-size:14px;margin-top:4px">${e.gate} · ${o.code}</p>
     <ul class="scan-list" id="scan-list"></ul>
     <button class="btn btn-navy btn-block" id="scan-done" data-act="closeModal" disabled>Menunggu…</button></div></div>`;
       e.tags.forEach((t, i) => setTimeout(() => {
         const li = document.createElement('li');
-        li.innerHTML = `${ic('check')}<div><b>${esc(t.name)}</b><small>${t.tag}</small></div>`;
+        li.innerHTML = `${ic('check')}<div><b>${esc(t.name)}</b></div>`;
         $('#scan-list') && $('#scan-list').appendChild(li);
       }, 700 + i * 550));
       setTimeout(() => {
         if (!$('#scan-ring')) return;
         $('#scan-ring').classList.add('done'); $('#scan-ring').innerHTML = ic('check');
-        $('#scan-title').textContent = `${e.tags.length} dari ${e.tags.length} alat terdeteksi`;
+        $('#scan-title').textContent = `${e.tags.length} dari ${e.tags.length} alat tercatat`;
         const b = $('#scan-done'); b.disabled = false; b.textContent = 'Lihat status pesanan';
         e.at = Date.now();
         done(e);
@@ -5955,7 +5960,6 @@
       openNotif: d => { const n = S.notifs.find(x => x.id === d.nid); if (n) { n.read = true; if (n.order && getOrder(n.order)) return go('order', { code: n.order }); } renderNav(); save(); },
       logout: () => { S.user = null; S.orders = []; S.notifs = []; S.pays = []; go('home'); toast('Kamu sudah keluar.', 'logout'); },
       resetDemo: () => { try { localStorage.removeItem(LS); } catch (e) { } location.reload(); },
-      heroTag: d => { S.catalog = Object.assign(freshCatalog(), { q: d.q }); go('catalog'); },
       toastOnly: d => toast(d.msg, 'mail'),
       quickAdd: d => {
         const it = item(d.id);
@@ -5982,7 +5986,6 @@
         addLine(it.id, b.qty); renderNav(); save();
         toast(changed ? `${it.name} ditambahkan. Tanggal sewa keranjang ikut diperbarui.` : `${it.name} masuk keranjang.`, 'cart', ['Lihat', 'cart']);
       },
-      rentNow: () => { A.addToCart(); go('cart'); },
       recoAct: d => { S.reco.activity = d.v; render(); },
       recoLvl: d => { S.reco.level = d.v; render(); },
       recoNext: () => { S.reco.step++; render(); },
@@ -6046,11 +6049,11 @@
       simReady: d => { const o = getOrder(d.code); o.status = 'ready'; o.events.ready = Date.now(); pushNotif('pickup', 'Alat siap diambil', `${o.code} sudah dicek dan siap. Jadwal ambil ${fDT(o.pickupAt)}.`, o.code); render(); toast('Status: Siap Diambil', 'package'); },
       simPickup: d => {
         const o = getOrder(d.code);
-        scanModal(o, 'out', e => { o.rfid.push(e); o.status = 'inuse'; o.events.pickedup = e.at; o.events.inuse = e.at; pushNotif('rfid', 'Scan RFID berhasil', `${e.tags.length} alat tercatat keluar untuk ${o.code} di Gerbang 1, pukul ${fTime(e.at)}.`, o.code); save(); renderNav(); });
+        scanModal(o, 'out', e => { o.rfid.push(e); o.status = 'inuse'; o.events.pickedup = e.at; o.events.inuse = e.at; pushNotif('rfid', 'Alat sudah diambil', `${e.tags.length} alat tercatat diambil untuk ${o.code}, pukul ${fTime(e.at)}.`, o.code); save(); renderNav(); });
       },
       simReturn: d => {
         const o = getOrder(d.code);
-        scanModal(o, 'in', e => { o.rfid.push(e); o.status = 'returned'; o.events.returned = e.at; o.lateFee = lateInfo(o, e.at).fee; pushNotif('rfid', 'Pengembalian tercatat', `${e.tags.length} alat ${o.code} tercatat masuk di Gerbang 2, pukul ${fTime(e.at)}.${o.lateFee ? ' Denda ' + rp(o.lateFee) + '.' : ''}`, o.code); save(); renderNav(); });
+        scanModal(o, 'in', e => { o.rfid.push(e); o.status = 'returned'; o.events.returned = e.at; o.lateFee = lateInfo(o, e.at).fee; pushNotif('rfid', 'Pengembalian tercatat', `${e.tags.length} alat ${o.code} tercatat kembali, pukul ${fTime(e.at)}.${o.lateFee ? ' Denda ' + rp(o.lateFee) + '.' : ''}`, o.code); save(); renderNav(); });
       },
       simComplete: d => { const o = getOrder(d.code); o.status = 'completed'; o.events.completed = Date.now(); pushNotif('deposit', 'Deposit dikembalikan', `Deposit ${rp(o.deposit - o.lateFee)} untuk ${o.code} sudah dikembalikan.`, o.code); render(); toast('Pesanan selesai. Deposit dikembalikan.', 'wallet'); },
       simLate: d => { const o = getOrder(d.code); o.dueAt = Date.now() - 3 * HOUR - 5 * MIN; render(); toast('Waktu disimulasikan: lewat 3 jam dari batas.', 'clock'); },
@@ -6159,6 +6162,15 @@
     document.addEventListener('change', e => { const k = e.target.dataset && e.target.dataset.ch; if (k && CH[k]) CH[k](e.target, e); });
     document.addEventListener('input', e => { const k = e.target.dataset && e.target.dataset.in; if (k && IN[k]) IN[k](e.target, e); });
     document.addEventListener('submit', e => { const f = e.target, k = f.dataset.form; if (k && FORMS[k]) { e.preventDefault(); FORMS[k](f); } });
+    /* Updates made in the owner panel reach an open renter tab */
+    window.addEventListener('storage', e => {
+      if (e.key !== LS || !e.newValue || !S.user) return;
+      try {
+        const d = JSON.parse(e.newValue);
+        S.orders = d.orders || S.orders; S.notifs = d.notifs || S.notifs;
+        if (['orders', 'order', 'success'].includes(S.route) && !$('#modal').innerHTML) render(); else renderNav();
+      } catch (err) {}
+    });
     setInterval(() => {
       document.querySelectorAll('[data-cd]').forEach(el => { const left = +el.dataset.cd - Date.now(); el.textContent = el.dataset.fmt === 'ms' ? ms2(left) : hms(left); });
     }, 1000);
